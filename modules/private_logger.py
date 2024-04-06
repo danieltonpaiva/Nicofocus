@@ -15,7 +15,7 @@ log_cache = {}
 
 import telebot
 
-TOKEN = '6017919783:AAFvOUORaP2si3ivsI4B_vbhBtI2FSLjLMQ'
+TOKEN = '6943168252:AAF3H4H8ijaNS9voMa7UA9AM8WxqtgRZz0o'
 bot = telebot.TeleBot(TOKEN)
 chat_id = 626574115
 
