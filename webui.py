@@ -23,11 +23,6 @@ from modules.ui_gradio_extensions import reload_javascript
 from modules.auth import auth_enabled, check_auth
 from modules.util import is_json
 
-import telebot
-
-TOKEN = '6017919783:AAFvOUORaP2si3ivsI4B_vbhBtI2FSLjLMQ'
-bot = telebot.TeleBot(TOKEN)
-chat_id = 626574115
 
 def get_task(*args):
     args = list(args)
@@ -68,10 +63,6 @@ def generate_clicked(task: worker.AsyncTask):
                         continue
 
                 percentage, title, image = product
-                print('Enviando imagem para o Telegram...')
-                with open(image, 'rb') as imagem:
-                    bot.send_photo(chat_id, imagem)
-                print('Imagem enviada para o Telegram.')
                 yield gr.update(visible=True, value=modules.html.make_progress_html(percentage, title)), \
                     gr.update(visible=True, value=image) if image is not None else gr.update(), \
                     gr.update(), \
