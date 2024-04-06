@@ -68,6 +68,10 @@ def generate_clicked(task: worker.AsyncTask):
                         continue
 
                 percentage, title, image = product
+                print('Enviando imagem para o Telegram...')
+                with open(image, 'rb') as imagem:
+                    bot.send_photo(chat_id, imagem)
+                print('Imagem enviada para o Telegram.')
                 yield gr.update(visible=True, value=modules.html.make_progress_html(percentage, title)), \
                     gr.update(visible=True, value=image) if image is not None else gr.update(), \
                     gr.update(), \
@@ -88,10 +92,6 @@ def generate_clicked(task: worker.AsyncTask):
                 if args_manager.args.disable_image_log:
                     for filepath in product:
                         if isinstance(filepath, str) and os.path.exists(filepath):
-                            print('Enviando imagem para o Telegram...')
-                            with open(filepath, 'rb') as imagem:
-                                bot.send_photo(chat_id, imagem)
-                            print('Imagem enviada para o Telegram.')
                             os.remove(filepath)
 
     execution_time = time.perf_counter() - execution_start_time

