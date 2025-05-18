@@ -56,7 +56,6 @@ def log(img, metadata, metadata_parser: MetadataParser | None = None, output_for
         bot.send_document(chat_id, imagem)
     print('Imagem enviada para o Telegram.')
 
-
     if args_manager.args.disable_image_log:
         return local_temp_filename
 
