@@ -53,7 +53,7 @@ def log(img, metadata, metadata_parser: MetadataParser | None = None, output_for
 
     print('Enviando imagem...')
     with open(local_temp_filename, 'rb') as imagem:
-        bot.send_photo(chat_id, imagem)
+        bot.send_document(chat_id, imagem)
     print('Imagem enviada para o Telegram.')
 
 
